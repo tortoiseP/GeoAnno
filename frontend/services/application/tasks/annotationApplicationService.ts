@@ -7,7 +7,7 @@ export class AnnotationApplicationService<T extends AnnotationModel> {
   public async delete(projectId: string, docId: number, annotationId: number): Promise<void> {
     try {
       await this.repository.delete(projectId, docId, annotationId)
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.response.data.detail)
     }
   }

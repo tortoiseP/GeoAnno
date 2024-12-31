@@ -49,7 +49,7 @@ export default Vue.extend({
   props: {
     login: {
       type: Function,
-      default: () => Promise
+      default: () => Promise.resolve()
     }
   },
   data() {
@@ -68,7 +68,7 @@ export default Vue.extend({
   methods: {
     async tryLogin() {
       try {
-        await this.login({
+        await (this.login as Function)({
           username: this.username,
           password: this.password
         })

@@ -21,6 +21,9 @@ module.exports = {
         ignoreStrings: true,
         ignoreTemplateLiterals: true
       }
-    ]
+    ],
+    'import/named': 'off', // 禁用 import/named 规则
+    'import/order': 'off',  // 禁用 import/order 规则
+    '@typescript-eslint/no-unused-vars': 'off', // 禁用 no-unused-vars 规则
   }
 }

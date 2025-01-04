@@ -1,0 +1,282 @@
+[
+  {
+    "id": 3,
+    "text": "相同",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 4,
+    "text": "相关",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 5,
+    "text": "子类",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 6,
+    "text": "实例",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 7,
+    "text": "定义",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 8,
+    "text": "上位概念",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 9,
+    "text": "下位概念",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 10,
+    "text": "含义",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 11,
+    "text": "包含",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 12,
+    "text": "属于",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 13,
+    "text": "导致",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 14,
+    "text": "原因",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 15,
+    "text": "地貌形态",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 16,
+    "text": "组成成分",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 17,
+    "text": "演变因素",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 18,
+    "text": "特征",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#009CE0",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 19,
+    "text": "形成条件",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 20,
+    "text": "早于",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 21,
+    "text": "晚于",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 22,
+    "text": "包含（时间）",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 23,
+    "text": "相等",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 24,
+    "text": "相接",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 25,
+    "text": "相交",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 26,
+    "text": "相交（空间）",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 27,
+    "text": "相离",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 28,
+    "text": "相接（空间）",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 29,
+    "text": "包含（空间）",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 30,
+    "text": "正东",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 31,
+    "text": "西北",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 32,
+    "text": "东南",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 33,
+    "text": "东北",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 34,
+    "text": "上方",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 35,
+    "text": "下方",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 36,
+    "text": "相邻",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 37,
+    "text": "位于",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#73D8FF",
+    "textColor": "#ffffff"
+  }
+]

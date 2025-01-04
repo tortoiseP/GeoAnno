@@ -1,0 +1,211 @@
+[
+  {
+    "id": 12,
+    "text": "时间",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#FB9E00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 13,
+    "text": "地点",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#AEA1FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 14,
+    "text": "事物",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 15,
+    "text": "事件",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#FCDC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 16,
+    "text": "现象",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#FDA1FF",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 17,
+    "text": "事物/坡地地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 18,
+    "text": "事物/河流地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 19,
+    "text": "事物/岩溶地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 20,
+    "text": "事物/冰川地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 21,
+    "text": "事物/冻土地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 22,
+    "text": "事物/荒漠地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 23,
+    "text": "事物/黄土地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 24,
+    "text": "事物/火山和岩溶地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 25,
+    "text": "事物/人类活动形成的地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 26,
+    "text": "事物/海岸地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 27,
+    "text": "人物",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#F44E3B",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 28,
+    "text": "数字",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68CCCA",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 29,
+    "text": "事物/地质",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 30,
+    "text": "事物/气候",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 31,
+    "text": "事物/自然灾害",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 32,
+    "text": "事物/水文",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 33,
+    "text": "事物/土壤",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 34,
+    "text": "事物/海洋",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 35,
+    "text": "事物/植被",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#68BC00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 36,
+    "text": "事物/构造地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  },
+  {
+    "id": 37,
+    "text": "事物/地貌",
+    "prefixKey": null,
+    "suffixKey": null,
+    "backgroundColor": "#A4DD00",
+    "textColor": "#ffffff"
+  }
+]
+

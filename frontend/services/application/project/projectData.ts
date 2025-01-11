@@ -22,6 +22,7 @@ export class ProjectDTO {
   hasSpan: boolean
   taskNames: string[]
   useRelation: boolean
+  enableStepper: boolean
 
   constructor(item: ProjectReadItem) {
     this.id = item.id
@@ -42,9 +43,10 @@ export class ProjectDTO {
     this.allowOverlapping = item.allowOverlapping
     this.graphemeMode = item.graphemeMode
     this.hasCategory = item.canDefineCategory
-    this.hasSpan = item.canDefineSpan
+    this.hasSpan = item.hasSpan
     this.taskNames = item.taskNames
     this.useRelation = item.useRelation
+    this.enableStepper = item.projectType === "Integrated"
   }
 }
 

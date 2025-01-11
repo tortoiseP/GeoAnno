@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { MemberRepository } from '@/domain/models/member/memberRepository'
 import { MemberItem } from '~/domain/models/member/member'
 
 export class APIMemberRepository implements MemberRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list(projectId: string): Promise<MemberItem[]> {
     const url = `/projects/${projectId}/members`

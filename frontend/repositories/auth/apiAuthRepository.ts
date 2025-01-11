@@ -1,8 +1,8 @@
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { AuthRepository } from '@/domain/models/auth/authRepository'
 
 export class APIAuthRepository implements AuthRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async login(username: string, password: string): Promise<void> {
     const url = `/auth/login/`

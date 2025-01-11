@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { ProjectRepository, SearchOption } from '@/domain/models/project/projectRepository'
 import { ProjectReadItem, ProjectWriteItem, ProjectItemList } from '~/domain/models/project/project'
 
 export class APIProjectRepository implements ProjectRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list({ limit = '10', offset = '0', q = '' }: SearchOption): Promise<ProjectItemList> {
     const url = `/projects?limit=${limit}&offset=${offset}&q=${q}`

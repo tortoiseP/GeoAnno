@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { TagRepository } from '~/domain/models/tag/tagRepository'
 import { TagItem } from '~/domain/models/tag/tag'
 
 export class APITagRepository implements TagRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list(projectId: string): Promise<TagItem[]> {
     const url = `/projects/${projectId}/tags`

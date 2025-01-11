@@ -1,8 +1,8 @@
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { AnnotationModel } from './interface'
 
 export abstract class AnnotationRepository<T extends AnnotationModel> {
-  constructor(private readonly model: any, readonly request = ApiService) {}
+  constructor(private readonly model: any, readonly request = ApiServiceV2) {}
 
   public async list(projectId: string, docId: number): Promise<T[]> {
     const url = this.baseUrl(projectId, docId)

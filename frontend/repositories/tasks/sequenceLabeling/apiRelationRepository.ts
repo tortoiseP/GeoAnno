@@ -1,9 +1,9 @@
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { RelationRepository } from '~/domain/models/tasks/relationRepository'
 import { RelationItem } from '~/domain/models/tasks/relation'
 
 export class ApiRelationRepository implements RelationRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list(projectId: string, exampleId: number): Promise<RelationItem[]> {
     const url = `/projects/${projectId}/examples/${exampleId}/relations`

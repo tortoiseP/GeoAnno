@@ -1,3 +1,4 @@
+import { ApiCaptionRepository } from './../repositories/tasks/Integrated/apiCaptionRepository';
 import { Plugin } from '@nuxt/types'
 import { APITaskStatusRepository } from '@/repositories/celery/apiTaskStatusRepository'
 import { TaskStatusApplicationService } from '@/services/application/celery/taskStatusApplicationService'
@@ -46,6 +47,10 @@ import { ApiBoundingBoxRepository } from '~/repositories/tasks/boundingBox/apiBo
 import { BoundingBoxApplicationService } from '~/services/application/tasks/boundingBox/boundingBoxApplicationService'
 import { ApiSegmentationRepository } from '~/repositories/tasks/segmentation/apiSegmentationRepository'
 import { SegmentationApplicationService } from '~/services/application/tasks/segmentation/segmentationApplicationService'
+import { ApiDefinitionRepository } from '~/repositories/tasks/Integrated/apiDefinitionRepository'
+import { IntegratedApplicationService } from '~/services/application/tasks/integrated/integratedApplicationService';
+import { APISpanRepository } from '~/repositories/tasks/Integrated/apiSpanRepository';
+import { ApiIntegratedRepository } from '~/repositories/tasks/Integrated/apiIntegratedRepository';
 
 export interface Services {
   categoryType: LabelApplicationService
@@ -73,6 +78,7 @@ export interface Services {
   tag: TagApplicationService
   bbox: BoundingBoxApplicationService
   segmentation: SegmentationApplicationService
+  integrated: IntegratedApplicationService
 }
 
 declare module 'vue/types/vue' {
@@ -105,6 +111,12 @@ const plugin: Plugin = (_, inject) => {
   const downloadRepository = new APIDownloadRepository()
   const boundingBoxRepository = new ApiBoundingBoxRepository()
   const segmentationRepository = new ApiSegmentationRepository()
+  const definitionRepository = new ApiDefinitionRepository()
+  const captionRepository = new ApiCaptionRepository()
+  const relationRepository = new ApiRelationRepository()
+  const spanRepository = new APISpanRepository()
+  const integratedReponsitory = new ApiIntegratedRepository()
+
 
   const categoryType = new LabelApplicationService(new APILabelRepository('category-type'))
   const spanType = new LabelApplicationService(new APILabelRepository('span-type'))
@@ -120,6 +132,13 @@ const plugin: Plugin = (_, inject) => {
   const sequenceLabeling = new SequenceLabelingApplicationService(
     sequenceLabelingRepository,
     linkRepository
+  )
+  const integrated = new IntegratedApplicationService(
+    integratedReponsitory,
+    definitionRepository,
+    captionRepository,
+    relationRepository,
+    spanRepository
   )
   const bbox = new BoundingBoxApplicationService(boundingBoxRepository)
   const segmentation = new SegmentationApplicationService(segmentationRepository)
@@ -160,7 +179,8 @@ const plugin: Plugin = (_, inject) => {
     download,
     tag,
     bbox,
-    segmentation
+    segmentation,
+    integrated
   }
   inject('services', services)
 }

@@ -22,7 +22,7 @@ export class ApiCaptionRepository implements CaptionRepository {
     text: string
   ): Promise<CaptionItem>{
     const url = `/projects/${projectId}/examples/${exampleId}/caption`
-    const response = await this.request.patch(url, { text })
+    const response = await this.request.put(url, { text })
     return CaptionItem.valueOf(response.data)
   }
 

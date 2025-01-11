@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2  from '@/services/api.service.v2'
 import { ExampleRepository, SearchOption } from '~/domain/models/example/exampleRepository'
 import { ExampleItem, ExampleItemList } from '~/domain/models/example/example'
 
 export class APIExampleRepository implements ExampleRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list(
     projectId: string,

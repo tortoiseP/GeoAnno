@@ -4,6 +4,7 @@ import { APISpanRepository } from '~/repositories/tasks/Integrated/apiSpanReposi
 import { CaptionRepository } from '~/domain/models/tasks/integrated/captionRepository';
 import { CaptionDTO, DefinitionDTO } from './integratedData';
 import { IntegratedReponsitory } from '~/domain/models/tasks/integrated/integratedReponsitory';
+import { Step } from '~/domain/models/project/integrated/step';
 
 export class IntegratedApplicationService {
   constructor(
@@ -14,12 +15,17 @@ export class IntegratedApplicationService {
     readonly spanRepository: APISpanRepository
   ) {}
 
-  public async updateStepStatus(projectId: number, exampleId: number, stepConfirmed: boolean[]) {
-    await this.integratedReponsitory.updateStepStatus(projectId, exampleId, stepConfirmed);
+  public async getStepStatus(projectId: number, exampleId: number): Promise<Array<boolean>> {
+    return await this.integratedReponsitory.getStepStatus(projectId, exampleId)
   }
 
-  public async getStepStatus(projectId: number, exampleId: number) {
-    await this.integratedReponsitory.getStepStatus(projectId, exampleId)
+  public async updateStepStatus(
+    projectId: number,
+    exampleId: number,
+    step: Step,
+    status: boolean
+  ): Promise<void> {
+    return await this.integratedReponsitory.updateStepStatus(projectId, exampleId, step, status);
   }
 
   public async getDefinition(projectId: number, exampleId: number) {

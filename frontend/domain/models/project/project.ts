@@ -2,15 +2,16 @@ import 'reflect-metadata'
 import { Expose, Type } from 'class-transformer'
 
 export type ProjectType =
-  | 'DocumentClassification'
+  // | 'DocumentClassification'
+  | 'Integrated'
   | 'SequenceLabeling'
-  | 'Seq2seq'
-  | 'IntentDetectionAndSlotFilling'
+  // | 'Seq2seq'
+  // | 'IntentDetectionAndSlotFilling'
   | 'ImageClassification'
   | 'ImageCaptioning'
   | 'BoundingBox'
-  | 'Segmentation'
-  | 'Speech2text'
+  // | 'Segmentation'
+  // | 'Speech2text'
 
 export class ProjectReadItem {
   id: number
@@ -44,6 +45,9 @@ export class ProjectReadItem {
   @Expose({ name: 'grapheme_mode' })
   graphemeMode: boolean
 
+  @Expose({name: 'has_span'})
+  hasSpan: boolean
+
   @Expose({ name: 'use_relation' })
   useRelation: boolean
 
@@ -64,24 +68,25 @@ export class ProjectReadItem {
 
   get annotationPageLink(): string {
     const mapping = {
-      DocumentClassification: 'text-classification',
+      Integrated: 'integrated',
+      // DocumentClassification: 'text-classification',
       SequenceLabeling: 'sequence-labeling',
-      Seq2seq: 'sequence-to-sequence',
-      IntentDetectionAndSlotFilling: 'intent-detection-and-slot-filling',
+      // Seq2seq: 'sequence-to-sequence',
+      // IntentDetectionAndSlotFilling: 'intent-detection-and-slot-filling',
       ImageClassification: 'image-classification',
       ImageCaptioning: 'image-captioning',
       BoundingBox: 'object-detection',
-      Segmentation: 'segmentation',
-      Speech2text: 'speech-to-text'
+      // Segmentation: 'segmentation',
+      // Speech2text: 'speech-to-text'
     }
     const url = `/projects/${this.id}/${mapping[this.projectType]}`
     return url
   }
 
   get taskNames(): string[] {
-    if (this.projectType === 'IntentDetectionAndSlotFilling') {
-      return ['DocumentClassification', 'SequenceLabeling']
-    }
+    // if (this.projectType === 'IntentDetectionAndSlotFilling') {
+    //   return ['DocumentClassification', 'SequenceLabeling']
+    // }
     return [this.projectType]
   }
 }
@@ -114,15 +119,16 @@ export class ProjectWriteItem {
 
   get resourceType(): string {
     const mapping = {
-      DocumentClassification: 'TextClassificationProject',
+      Integrated: 'integrated',
+      // DocumentClassification: 'TextClassificationProject',
       SequenceLabeling: 'SequenceLabelingProject',
-      Seq2seq: 'Seq2seqProject',
-      IntentDetectionAndSlotFilling: 'IntentDetectionAndSlotFillingProject',
+      // Seq2seq: 'Seq2seqProject',
+      // IntentDetectionAndSlotFilling: 'IntentDetectionAndSlotFillingProject',
       ImageClassification: 'ImageClassificationProject',
       ImageCaptioning: 'ImageCaptioningProject',
       BoundingBox: 'BoundingBoxProject',
-      Segmentation: 'SegmentationProject',
-      Speech2text: 'Speech2textProject'
+      // Segmentation: 'SegmentationProject',
+      // Speech2text: 'Speech2textProject'
     }
     return mapping[this.project_type]
   }

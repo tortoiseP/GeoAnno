@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { UserRepository } from '@/domain/models/user/userRepository'
 import { UserItem } from '~/domain/models/user/user'
 
 export class APIUserRepository implements UserRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async getMe(): Promise<UserItem> {
     const url = '/me'

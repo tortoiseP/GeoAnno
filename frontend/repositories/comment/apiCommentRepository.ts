@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { CommentRepository, SearchOption } from '@/domain/models/comment/commentRepository'
 import { CommentItem, CommentItemList } from '~/domain/models/comment/comment'
 
 export class APICommentRepository implements CommentRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async listAll(
     projectId: string,

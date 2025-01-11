@@ -1,5 +1,5 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { LabelRepository } from '~/domain/models/label/labelRepository'
 import { LabelItem } from '~/domain/models/label/label'
 
@@ -13,7 +13,7 @@ export interface LabelItemResponse {
 }
 
 export class APILabelRepository implements LabelRepository {
-  constructor(private readonly baseUrl = 'label', private readonly request = ApiService) {}
+  constructor(private readonly baseUrl = 'label', private readonly request = ApiServiceV2) {}
 
   async list(projectId: string): Promise<LabelItem[]> {
     const url = `/projects/${projectId}/${this.baseUrl}s`

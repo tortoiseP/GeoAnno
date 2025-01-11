@@ -1,14 +1,14 @@
 <template>
   <v-card>
-    <v-card-title>Progress</v-card-title>
+    <v-card-title>进度</v-card-title>
     <v-card-text>
       <v-list class="pt-0" dense>
         <v-list-item class="pa-0">
-          <v-list-item-title>Total</v-list-item-title>
+          <v-list-item-title>总数</v-list-item-title>
           <v-list-item-subtitle class="text-right" v-text="progress.total" />
         </v-list-item>
         <v-list-item class="pa-0">
-          <v-list-item-title>Complete</v-list-item-title>
+          <v-list-item-title>已完成</v-list-item-title>
           <v-list-item-subtitle class="text-right" v-text="progress.complete" />
         </v-list-item>
       </v-list>

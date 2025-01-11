@@ -6,7 +6,7 @@
         {{ title }}
       </div>
     </v-card-title>
-    <v-card-text class="subtitle-1 layout justify-center">
+    <v-card-text class="subtitle-1 layout justify-center reset-margin">
       {{ text }}
     </v-card-text>
   </v-card>
@@ -35,3 +35,9 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style scoped>
+.reset-margin {
+  margin: auto 0 !important;
+}
+</style>

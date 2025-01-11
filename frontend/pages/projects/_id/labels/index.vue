@@ -86,7 +86,8 @@ export default Vue.extend({
     },
 
     isIntentDetectionAndSlotFilling(): boolean {
-      return this.project.projectType === 'IntentDetectionAndSlotFilling'
+      // return this.project.projectType === 'IntentDetectionAndSlotFilling'
+      return false
     },
 
     labelType(): string {

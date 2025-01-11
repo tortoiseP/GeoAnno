@@ -21,7 +21,7 @@ export default Vue.extend({
       editedItem: {
         name: '',
         description: '',
-        projectType: 'DocumentClassification',
+        projectType: 'Integrated',
         enableRandomOrder: false,
         enableShareAnnotation: false,
         singleClassClassification: false,
@@ -33,7 +33,7 @@ export default Vue.extend({
       defaultItem: {
         name: '',
         description: '',
-        projectType: 'DocumentClassification',
+        projectType: 'Integrated',
         enableRandomOrder: false,
         enableShareAnnotation: false,
         singleClassClassification: false,

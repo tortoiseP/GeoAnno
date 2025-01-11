@@ -1,110 +1,126 @@
 <template>
   <div>
-  <component :is="currentComponent"
-              v-if="doc.id"
-              v-shortkey="shortKeys"
-              @shortkey="changeSelectedLabel">
-    <template #header>
-      <toolbar-laptop
-        :doc-id="doc.id"
-        :steps="steps"
-        :step-idx="stepIdx"
-        :step-confirmed="stepConfirmed"
-        :enable-auto-labeling.sync="enableAutoLabeling"
-        :guideline-text="project.guideline"
-        :is-reviewd="doc.isConfirmed"
-        :total="docs.count"
-        :enable-stepper="project.enableStepper"
-        class="d-none d-sm-block"
-        @click:clear-label="clear"
-        @click:review="confirm"
-        @step-change="onStepChange"
-      />
-      <toolbar-mobile :total="docs.count" class="d-flex d-sm-none" />
-    </template>
-    <template #content>
-      <v-card v-if="steps[stepIdx - 1] === Step.Definition" class="image-show-card">
-        <image-define :image-url="doc.fileUrl" @loaded="imageLoaded" />
-      </v-card>
-      <v-card v-else-if="steps[stepIdx - 1] === Step.Caption">
-        <image-caption :example-id="doc.id" @reverse="updateStep" />
-      </v-card>
-      <v-card v-else-if="steps[stepIdx - 1] === Step.Label">
-        <div class="annotation-text pa-4">
-          <entity-editor
-            :dark="$vuetify.theme.dark"
-            :rtl="isRTL"
-            :text="doc.text"
-            :entities="annotations"
-            :entity-labels="spanTypes"
-            :relations="relations"
-            :relation-labels="relationTypes"
-            :allow-overlapping="project.allowOverlapping"
-            :grapheme-mode="project.graphemeMode"
-            :selected-label="selectedLabel"
-            :relation-mode="relationMode"
-            @addEntity="addSpan"
-            @addRelation="addRelation"
-            @click:entity="updateSpan"
-            @click:relation="updateRelation"
-            @contextmenu:entity="deleteSpan"
-            @contextmenu:relation="deleteRelation"
-          />
-        </div>
-      </v-card>
-    </template>
-    <template v-if="enableSidebar" #sidebar>
-      <!-- 图像元数据表单 -->
-      <v-card v-if="steps[stepIdx - 1] === Step.Definition">
-        <v-card-title>图像元数据</v-card-title>
-        <v-card-text>
-          <meta-form
-            :project-id="projectId"
-            :example-id="doc.id"
-            @reverse="updateStep" />
-        </v-card-text>
-      </v-card>
-      <div v-else-if="steps[stepIdx - 1] === Step.Label">
-        <annotation-progress :progress="progress" />
-        <!-- 文本信息标注标签管理 -->
-        <v-card class="mt-4">
-          <v-card-title>标签类型</v-card-title>
-          <v-card-text>
-            <v-switch v-if="useRelationLabeling" v-model="relationMode">
-              <template #label>
-                <span v-if="relationMode">关系</span>
-                <span v-else>概念/实体</span>
-              </template>
-            </v-switch>
-            <v-chip-group v-model="selectedLabelIndex" column>
-              <v-chip
-                v-for="(item, index) in labelTypes"
-                :key="item.id"
-                v-shortkey="[item.suffixKey]"
-                :color="item.backgroundColor"
-                filter
-                :text-color="$contrastColor(item.backgroundColor)"
-                @shortkey="selectedLabelIndex = index"
-              >
-                {{ item.text }}
-                <v-avatar
-                  v-if="item.suffixKey"
-                  right
-                  color="white"
-                  class="black--text font-weight-bold"
-                >
-                  {{ item.suffixKey }}
-                </v-avatar>
-              </v-chip>
-            </v-chip-group>
-          </v-card-text>
-        </v-card>
-        <v-card class="mt-4">
+    <component :is="currentComponent"
+                v-if="doc.id"
+                v-shortkey="shortKeys"
+                @shortkey="changeSelectedLabel">
+      <template #header>
+        <integrated-toolbar-laptop
+          :doc-id="doc.id"
+          :steps="steps"
+          :step-idx="stepIdx"
+          :step-confirmed="stepConfirmed"
+          :enable-auto-labeling.sync="enableAutoLabeling"
+          :guideline-text="project.guideline"
+          :total="docs.count"
+          :enable-stepper="project.enableStepper"
+          class="d-none d-sm-block"
+          @click:clear-label="clear"
+          @click:review="confirm"
+          @step-change="onStepChange"
+          @page-change="initStepIdx"
+        />
+        <toolbar-mobile :total="docs.count" class="d-flex d-sm-none" />
+      </template>
+      <template #content>
+        <v-card v-if="steps[stepIdx - 1] === Step.Definition" class="image-show-card">
           <image-define :image-url="doc.fileUrl" @loaded="imageLoaded" />
         </v-card>
-      </div>
-    </template>
-  </component>
+        <v-card v-else-if="steps[stepIdx - 1] === Step.Caption" :disabled="false">
+          <image-caption :example-id="doc.id" :locked="locked"/>
+        </v-card>
+        <v-card v-else-if="steps[stepIdx - 1] === Step.Label">
+          <div class="annotation-text pa-4">
+            <entity-editor
+              :dark="$vuetify.theme.dark"
+              :rtl="isRTL"
+              :text="doc.text"
+              :entities="annotations"
+              :entity-labels="spanTypes"
+              :relations="relations"
+              :relation-labels="relationTypes"
+              :allow-overlapping="project.allowOverlapping"
+              :grapheme-mode="project.graphemeMode"
+              :selected-label="selectedLabel"
+              :relation-mode="relationMode"
+              @addEntity="addSpan"
+              @addRelation="addRelation"
+              @click:entity="updateSpan"
+              @click:relation="updateRelation"
+              @contextmenu:entity="deleteSpan"
+              @contextmenu:relation="deleteRelation"
+            />
+          </div>
+        </v-card>
+      </template>
+      <template v-if="enableSidebar" #sidebar>
+        <!-- 图像元数据表单 -->
+        <v-card v-if="steps[stepIdx - 1] === Step.Definition">
+          <v-card-title>图像元数据</v-card-title>
+          <v-card-text>
+            <meta-form
+              :project-id="projectId"
+              :example-id="doc.id" />
+          </v-card-text>
+        </v-card>
+        <div v-else-if="steps[stepIdx - 1] === Step.Label">
+          <annotation-progress :progress="progress" />
+          <!-- 文本信息标注标签管理 -->
+          <v-card class="mt-4">
+            <v-card-title>标签类型</v-card-title>
+            <v-card-text>
+              <v-switch v-if="useRelationLabeling" v-model="relationMode">
+                <template #label>
+                  <span v-if="relationMode">关系</span>
+                  <span v-else>概念/实体</span>
+                </template>
+              </v-switch>
+              <v-chip-group v-model="selectedLabelIndex" column>
+                <v-chip
+                  v-for="(item, index) in labelTypes"
+                  :key="item.id"
+                  v-shortkey="[item.suffixKey]"
+                  :color="item.backgroundColor"
+                  filter
+                  :text-color="$contrastColor(item.backgroundColor)"
+                  @shortkey="selectedLabelIndex = index"
+                >
+                  {{ item.text }}
+                  <v-avatar
+                    v-if="item.suffixKey"
+                    right
+                    color="white"
+                    class="black--text font-weight-bold"
+                  >
+                    {{ item.suffixKey }}
+                  </v-avatar>
+                </v-chip>
+              </v-chip-group>
+            </v-card-text>
+          </v-card>
+          <v-card class="mt-4">
+            <image-define :image-url="doc.fileUrl" @loaded="imageLoaded" />
+          </v-card>
+        </div>
+      </template>
+    </component>
+    <v-snackbar
+      v-model="snackbar.visiable"
+      :timeout="snackbar.timeout"
+      bottom
+    >
+      {{ snackbar.text }}
+      <template #action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar.visiable = false"
+        >
+          关闭
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -116,7 +132,7 @@ import LayoutMeta from '~/components/tasks/layout/LayoutMeta'
 import LayoutText from '@/components/tasks/layout/LayoutText'
 import LayoutImage from '~/components/tasks/layout/LayoutImage'
 import ListMetadata from '@/components/tasks/metadata/ListMetadata'
-import ToolbarLaptop from '@/components/tasks/toolbar/ToolbarLaptop'
+import IntegratedToolbarLaptop from '@/components/tasks/toolbar/IntegratedToolbarLaptop'
 import ToolbarMobile from '@/components/tasks/toolbar/ToolbarMobile'
 import EntityEditor from '@/components/tasks/sequenceLabeling/EntityEditor.vue'
 import AnnotationProgress from '@/components/tasks/sidebar/AnnotationProgress.vue'
@@ -138,7 +154,7 @@ export default {
     LayoutCaption,
     LayoutImage,
     ListMetadata,
-    ToolbarLaptop,
+    IntegratedToolbarLaptop,
     ToolbarMobile
   },
 
@@ -162,26 +178,30 @@ export default {
       selectedLabelIndex: null,
       progress: {},
       relationMode: false,
+      // 控制描述文本界面锁定状态
+      locked: true,
       // 集成式标注进度展示
       Step,
       steps: stepList,
       stepIdx: 1,
-      stepConfirmed: new Array(stepList).fill(false)
+      stepConfirmed: [],
+      // 提示弹窗
+      snackbar: {
+        visiable: false,
+        text: "",
+        timeout: 2000
+      }
     }
   },
 
   async fetch() { // SSR 异步数据获取，在页面渲染之前
     this.docs = await this.$services.example.fetchOne(
-      this.projectId,
+      this.projectId.toString(),
       this.$route.query.page,
       this.$route.query.q,
       this.$route.query.isChecked
     )
     const doc = this.docs.items[0]
-    if(doc !== undefined) {
-      doc.fileUrl = "http://127.0.0.1:8000/media/JN2Csq9tHShPaUBXQaxtCb/jT4F9aC8HhYMLqnZHGazo7"
-    }
-    
     if (this.enableAutoLabeling && !doc.isConfirmed) {
       await this.autoLabel(doc.id)
     }
@@ -218,7 +238,7 @@ export default {
     },
 
     projectId() {
-      return this.$route.params.id
+      return this.$route.params.id;;
     },
 
     doc() {
@@ -261,11 +281,13 @@ export default {
         this.list(this.doc.id)
       }
     },
-    annotations(newVal, oldVal) {
-      this.checkAndUpdateLabelStep(newVal.length, oldVal.length)
-    },
-    relations(oldVal, newVal) {
-      this.checkAndUpdateLabelStep(newVal.length, oldVal.length)
+    annotations() {
+      if(this.annotations.length === 0) {
+        this.locked = false;
+      } else {
+        this.locked = true;
+      }
+      console.log("is locked?" + this.locked);
     }
   },
 
@@ -285,14 +307,14 @@ export default {
     },
 
     async list(docId) {
-      // const stepConfirmed = await this.$services.integrated.getStepStatus(this.projectId, docId);
-      // this.stepConfirmed = stepConfirmed
+      const sc = await this.$services.integrated.getStepStatus(this.projectId, docId);
       const annotations = await this.$services.sequenceLabeling.list(this.projectId, docId)
       const relations = await this.$services.sequenceLabeling.listRelations(this.projectId, docId)
       // In colab mode, if someone add a new label and annotate data
       // with the label during your work, it occurs exception
       // because there is no corresponding label.
       await this.maybeFetchSpanTypes(annotations)
+      this.stepConfirmed = sc
       this.annotations = annotations
       this.relations = relations
     },
@@ -366,8 +388,8 @@ export default {
       this.progress = await this.$services.metrics.fetchMyProgress(this.projectId)
     },
 
-    async confirm() {
-      await this.$services.example.confirm(this.projectId, this.doc.id)
+    async confirm(step) {
+      this.updateStep(step)
       await this.$fetch()
       this.updateProgress()
     },
@@ -376,8 +398,14 @@ export default {
       this.selectedLabelIndex = this.spanTypes.findIndex((item) => item.suffixKey === event.srcKey)
     },
 
-    onStepChange(newStepIdx) {
+    async onStepChange(newStepIdx) {
       this.stepIdx = newStepIdx
+      if(this.stepIdx === 2 && this.locked) {
+        this.snackbar.visiable = true
+        this.snackbar.text = "文本无法编辑（已标注）"
+      } else if(this.stepIdx === 3) {
+        await this.$fetch()
+      }
       console.log("stepInx updated: " + newStepIdx)
     },
 
@@ -399,32 +427,34 @@ export default {
       }
       this.stage.draw()
     },
-    updateStep(step, b) {
+    updateStep(step) {
       const stepConfirmed = [...this.stepConfirmed]
+      let idx = 0
       switch (step) {
         case Step.Definition:
-          stepConfirmed[0] = b
+          idx = 0
           break
         case Step.Caption:
-          stepConfirmed[1] = b
+          idx = 1
           break
         case Step.Label:
-          stepConfirmed[2] = b
+          idx = 2
           break
         default:
           return
       }
+      stepConfirmed[idx] = !stepConfirmed[idx]
       this.stepConfirmed = stepConfirmed
-      // this.$services.integrated.updateStepStatus(this.projectId, this.doc.id, this.stepConfirmed)
+      this.$services.integrated.updateStepStatus(
+        parseInt(this.projectId),
+        parseInt(this.doc.id),
+        this.steps[idx],
+        this.stepConfirmed[idx]
+      )
     },
-    checkAndUpdateLabelStep(newLen, oldLen) {
-      if(!this.stepConfirmed[2] && oldLen === 0 && newLen > 0) {
-        this.updateStep(Step.Label, true)
-      } else if(this.stepConfirmed[2] && oldLen > 0 && newLen === 0
-        && this.annotations.length === 0 && this.relations.length === 0
-      ) {
-        this.updateStep(Step.Label, false)
-      }
+    initStepIdx() {
+      // this.$nextTick(); // 等待 DOM 更新后执行step切换
+      this.stepIdx = 1;
     }
   }
 }

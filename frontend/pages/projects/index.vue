@@ -41,7 +41,7 @@ export default Vue.extend({
   },
   layout: 'projects',
 
-  middleware: ['check-auth', 'auth'],
+  middleware: ['check-auth', 'auth'], // 页面级别登录状态检查
 
   data() {
     return {

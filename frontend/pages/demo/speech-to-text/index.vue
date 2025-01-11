@@ -42,7 +42,7 @@ export default {
         annotations: [
           {
             id: 17,
-            text: 'Hi! Welcome to doccano!',
+            text: 'Hi! Welcome to GeoAnno!',
             user: 1,
             document: 8
           }

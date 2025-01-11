@@ -1,55 +1,74 @@
 <template>
-  <form>
-    <v-text-field
-      v-model="formData.name"
-      :error-messages="nameErrors"
-      label="图名"
-      :counter="25"
-      required
-      @input="$v.formData.name.$touch()"
-      @blur="$v.formData.name.$touch()"
-    ></v-text-field>
-    <v-select
-      v-model="formData.imageType"
-      :items="items"
-      :error-messages="imageTypeErrors"
-      label="图像类型"
-      required
-      @change="$v.formData.imageType.$touch()"
-      @blur="$v.formData.imageType.$touch()"
-    ></v-select>
-    <v-textarea
-      v-model="formData.caption"
-      :error-messages="captionErrors"
-      label="图注"
-      :counter="128"
-      rows="3"
-      @input="$v.formData.caption.$touch()"
-      @blur="$v.formData.caption.$touch()"
-    ></v-textarea>
-    <v-text-field
-      v-model="formData.imageId"
-      label="图像编号"
-      disabled
-    ></v-text-field>
-    <v-text-field
-      v-model="formData.sourceName"
-      label="数据来源"
-      disabled
-    ></v-text-field>
-    <v-text-field
-      v-model="formData.textTitle"
-      label="章节标题"
-      disabled
-    ></v-text-field>
-    <v-text-field
-      v-model="formData.textId"
-      label="上下文编号"
-      disabled
-    ></v-text-field>
-    <v-btn @click="saveForm">保存</v-btn>
-    <v-btn @click="resetForm">清除</v-btn>
-  </form>
+  <div>
+    <form>
+      <v-text-field
+        v-model="formData.name"
+        :error-messages="nameErrors"
+        label="图名"
+        :counter="128"
+        required
+        @input="$v.formData.name.$touch()"
+        @blur="$v.formData.name.$touch()"
+      ></v-text-field>
+      <v-select
+        v-model="formData.imageType"
+        :items="items"
+        :error-messages="imageTypeErrors"
+        label="图像类型"
+        required
+        @change="$v.formData.imageType.$touch()"
+        @blur="$v.formData.imageType.$touch()"
+      ></v-select>
+      <v-textarea
+        v-model="formData.caption"
+        :error-messages="captionErrors"
+        label="图注"
+        :counter="512"
+        rows="3"
+        @input="$v.formData.caption.$touch()"
+        @blur="$v.formData.caption.$touch()"
+      ></v-textarea>
+      <v-text-field
+        v-model="formData.imageId"
+        label="图像编号"
+        disabled
+      ></v-text-field>
+      <v-text-field
+        v-model="formData.sourceName"
+        label="数据来源"
+        disabled
+      ></v-text-field>
+      <v-text-field
+        v-model="formData.textTitle"
+        label="章节标题"
+        disabled
+      ></v-text-field>
+      <v-text-field
+        v-model="formData.textId"
+        label="上下文编号"
+        disabled
+      ></v-text-field>
+      <v-btn @click="saveForm">保存</v-btn>
+      <v-btn @click="resetForm">重置</v-btn>
+    </form>
+    <v-snackbar
+      v-model="snackbar.visiable"
+      :timeout="snackbar.timeout"
+      bottom
+    >
+      {{ snackbar.text }}
+      <template #action="{ attrs }">
+        <v-btn
+          color="blue"
+          text
+          v-bind="attrs"
+          @click="snackbar.visiable = false"
+        >
+          关闭
+        </v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 
 <script>
@@ -80,14 +99,19 @@ export default {
         textTitle: '',
         textId: ''
       },
-      items: ['地貌学原理图', '地貌学地图', '地貌学实景图', '其他图像']
+      items: ['地貌学原理图', '地貌学地图', '地貌学实景图', '其他图像'],
+      snackbar: {
+        visiable: false,
+        text: "",
+        timeout: 2000
+      }
     }
   },
   validations: {
     formData: {
-      name: { required, maxLength: maxLength(25) },
+      name: { required, maxLength: maxLength(128) },
       imageType: { required },
-      caption: { maxLength: maxLength(128) }
+      caption: { maxLength: maxLength(512) }
     }
   },
   computed: {
@@ -121,7 +145,7 @@ export default {
   },
   methods: {
     async fetchFormData() {
-      const data = await this.$services.integrated.getMeta(
+      const data = await this.$services.integrated.getDefinition(
         parseInt(this.projectId),
         parseInt(this.exampleId)
       )
@@ -138,19 +162,19 @@ export default {
       // };
       this.formData = { ...this.formData, ...data }
     },
-    saveForm() {
-      this.$services.integrated.updateMeta(
+    async saveForm() {
+      await this.$services.integrated.updateDefinition(
         this.projectId,
         this.exampleId,
         this.formData.name,
         this.formData.imageType,
         this.formData.caption
       );
-      this.$emit('reverse', Step.Definition, true)
+      this.snackbar.visiable = true
+      this.snackbar.text = "已保存"
     },
     resetForm() {
       this.fetchFormData()
-      this.$emit('reverse', Step.Definition, false)
     }
   }
 }

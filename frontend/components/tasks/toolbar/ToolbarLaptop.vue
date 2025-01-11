@@ -42,6 +42,7 @@
           <form-keyboard-shortcut @click:close="dialogShortcut = false" />
         </v-dialog>
       </v-btn-toggle>
+      
       <slot />
       <v-spacer />
       <button-pagination

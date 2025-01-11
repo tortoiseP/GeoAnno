@@ -52,6 +52,15 @@
       @update:query="updateQuery"
       @click:labeling="movePage"
     />
+    <integrated-list
+      v-else-if="isIntegratedTask"
+      v-model="selected"
+      :items="item.items"
+      :is-loading="isLoading"
+      :total="item.count"
+      @update:query="updateQuery"
+      @click:labeling="movePage"
+    />
     <document-list
       v-else
       v-model="selected"
@@ -72,6 +81,7 @@ import FormDelete from '@/components/example/FormDelete.vue'
 import FormDeleteBulk from '@/components/example/FormDeleteBulk.vue'
 import ImageList from '~/components/example/ImageList.vue'
 import AudioList from '~/components/example/AudioList.vue'
+import IntegratedList from '~/components/example/IntegratedList.vue'
 import { ExampleListDTO, ExampleDTO } from '~/services/application/example/exampleData'
 import ActionMenu from '~/components/example/ActionMenu.vue'
 import { ProjectDTO } from '~/services/application/project/projectData'
@@ -82,6 +92,7 @@ export default Vue.extend({
     AudioList,
     DocumentList,
     ImageList,
+    IntegratedList,
     FormDelete,
     FormDeleteBulk
   },
@@ -123,7 +134,11 @@ export default Vue.extend({
       return imageTasks.includes(this.project.projectType)
     },
     isAudioTask(): boolean {
-      return this.project.projectType === 'Speech2text'
+      // return this.project.projectType === 'Speech2text'
+      return false
+    },
+    isIntegratedTask(): boolean {
+      return this.project.projectType === 'Integrated'
     },
     itemKey(): string {
       if (this.isImageTask || this.isAudioTask) {

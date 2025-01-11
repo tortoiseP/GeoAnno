@@ -3,7 +3,7 @@
     <template #activator="{ on: menu }">
       <v-tooltip bottom>
         <template #activator="{ on: tooltip }">
-          <v-btn icon v-on="{ ...tooltip, ...menu }">
+          <v-btn class="btn-border" icon v-on="{ ...tooltip, ...menu }">
             <v-icon>
               {{ mdiFilter }}
             </v-icon>
@@ -68,3 +68,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn-border {
+  border-width: 1px;
+}
+</style>

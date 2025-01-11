@@ -1,13 +1,24 @@
 <template>
   <div class="editor-wrapper">
     <editor
+      v-if="!locked"
       ref="toastuiEditor"
       style="height: 100%;"
       :initial-value="caption.text"
       :options="editorOptions"
       preview-style="vertical"
+      :initial-edit-type="locked ? 'wysiwyg' : 'markdown'"
       @change="updateCaption"
     />
+    <viewer
+      v-else
+      ref="toastuiEditor"
+      style="height: 100%; overflow: auto;"
+      :initial-value="caption.text"
+      :options="editorOptions"
+      preview-style="vertical"
+    />
+
     <v-snackbar
       v-model="snackbar.visiable"
       :timeout="snackbar.timeout"
@@ -33,13 +44,14 @@ import _ from 'lodash'
 import 'tui-editor/dist/tui-editor.css'
 import 'tui-editor/dist/tui-editor-contents.css'
 import 'codemirror/lib/codemirror.css'
-import { Editor } from '@toast-ui/vue-editor'
+import { Editor, Viewer } from '@toast-ui/vue-editor'
 import '@/assets/style/editor.css'
-import { Step } from '~/domain/models/project/integrated/step'
+import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 
 export default {
   components: {
-    Editor
+    Editor,
+    Viewer
   },
 
   validate({ params }) {
@@ -50,13 +62,18 @@ export default {
     exampleId: {
       type: String,
       required: true
+    },
+    locked: {
+      type: Boolean,
+      require: true
     }
   },
 
   data() {
     return {
       editorOptions: {
-        language: this.$t('toastui.localeCode')
+        language: this.$t('toastui.localeCode'),
+        // hideModeSwitch: true
       },
       projectId: "",
       caption: {
@@ -74,15 +91,7 @@ export default {
     }
   },
 
-  watch: {
-    'caption.text' (newText, oldText) {
-      if (newText.length > 0 && oldText.length === 0) {
-        this.$emit('reverse', Step.Caption, true);
-      } else if (newText.length === 0 && oldText.length > 0) {
-        this.$emit('reverse', Step.Caption, false);
-      }
-    }
-  },
+  watch: {},
 
   async mounted() {
     this.projectId = this.$route.params.id
@@ -112,8 +121,12 @@ ${imageMarkdown}
 * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *  * * *
 ${textMarkdown}`
     },
+    showAutoSaveMessage: _.throttle(function() {
+      this.snackbar.visiable = true
+      this.snackbar.text = "已自动保存"
+    }, 15000), // 每15秒最多触发一次（节流）
     updateCaption: _.debounce(function () {
-      if (this.mounted) {
+      if (this.mounted && !this.locked) {
         const markdown = this.$refs.toastuiEditor.invoke('getMarkdown')
         this.caption.text = markdown.split("\n").slice(3).join("\n") 
         this.$services.integrated.updateCaption(
@@ -121,6 +134,7 @@ ${textMarkdown}`
           parseInt(this.exampleId),
           this.caption.text
         )
+        this.showAutoSaveMessage()
       }
     }, 1000)
   }

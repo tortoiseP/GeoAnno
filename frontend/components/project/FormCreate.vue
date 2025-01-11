@@ -199,35 +199,36 @@ export default Vue.extend({
   computed: {
     projectTypes() {
       return [
-        'DocumentClassification',
+        // 'DocumentClassification',
+        'Integrated',
         'SequenceLabeling',
-        'Seq2seq',
-        'IntentDetectionAndSlotFilling',
+        // 'Seq2seq',
+        // 'IntentDetectionAndSlotFilling',
         'ImageClassification',
         'ImageCaptioning',
         'BoundingBox',
-        'Segmentation',
-        'Speech2text'
+        // 'Segmentation',
+        // 'Speech2text'
       ]
     },
     images() {
       return [
-        'text_classification.png',
+        'integrated.png',
         'sequence_labeling.png',
-        'seq2seq.png',
-        'intent_detection.png',
+        // 'seq2seq.png',
+        // 'intent_detection.png',
         'image_classification.png',
         'image_captioning.jpg',
         'object_detection.jpg',
-        'segmentation.jpg',
-        'speech_to_text.png'
+        // 'segmentation.jpg',
+        // 'speech_to_text.png'
       ]
     },
     hasSingleLabelOption() {
       return ['DocumentClassification', 'ImageClassification'].includes(this.projectType)
     },
     isSequenceLabelingProject() {
-      return this.projectType === 'SequenceLabeling'
+      return this.projectType === 'SequenceLabeling' || this.projectType === 'Integrated'
     }
   },
 

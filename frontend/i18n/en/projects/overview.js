@@ -12,14 +12,15 @@ export default {
   deleteProjectMessage: 'Are you sure you want to delete these projects?',
   search: 'Search',
   projectTypes: [
-    'Text Classification',
+    // 'Text Classification',
+    'Integrated Labeling',
     'Sequence Labeling',
-    'Sequence to sequence',
-    'Intent Detection and Slot Filling',
+    // 'Sequence to sequence',
+    // 'Intent Detection and Slot Filling',
     'Image Classification',
     'Image Captioning',
     'Object Detection',
-    'Segmentation',
-    'Speech to Text'
+    // 'Segmentation',
+    // 'Speech to Text'
   ]
 }

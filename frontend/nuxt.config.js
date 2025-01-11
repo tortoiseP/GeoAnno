@@ -26,7 +26,8 @@ export default {
   },
 
   env: {
-    baseUrl: '/v1'
+    baseUrl: '/v1',
+    baseUrlV2: '/v2',
   },
 
   /*
@@ -36,7 +37,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@mdi/font/css/materialdesignicons.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -104,7 +107,10 @@ export default {
     // Use a fake value for use at build-time
     '/v1/': {
       target: process.env.API_URL || 'http://127.0.0.1:8000'
-    }
+    },
+    '/v2/': {
+      target: process.env.API_URL || 'http://127.0.0.1:9000'
+    },
   },
   /*
    ** vuetify module configuration
@@ -139,6 +145,9 @@ export default {
           error: '#FF5252'
         }
       }
+    },
+    icons: { // font方式加载icon（组件以字符串形式传入）
+      iconfont: 'mdi'
     }
   },
   /*
@@ -149,7 +158,7 @@ export default {
      ** You can extend webpack config here
      */
     publicPath: process.env.PUBLIC_PATH || '/_nuxt/',
-    extend(config, _) {
+    extend(config, { isDev }) {
       // config.module.rules.push({
       //   test: /\.(txt|csv|conll|jsonl)$/i,
       //   loader: 'file-loader',
@@ -170,6 +179,10 @@ export default {
           name: '[path][name].[ext]'
         }
       })
-    }
+      if(isDev) {
+        config.devtool = 'source-map'
+      }
+    },
+    devtools: true
   }
 }

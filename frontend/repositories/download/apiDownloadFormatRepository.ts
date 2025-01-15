@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer'
-import ApiService from '@/services/api.service'
+import ApiServiceV2 from '@/services/api.service.v2'
 import { DownloadFormatRepository } from '@/domain/models/download/downloadFormatRepository'
 import { Format } from '~/domain/models/download/format'
 
 export class APIDownloadFormatRepository implements DownloadFormatRepository {
-  constructor(private readonly request = ApiService) {}
+  constructor(private readonly request = ApiServiceV2) {}
 
   async list(projectId: string): Promise<Format[]> {
     const url = `/projects/${projectId}/download-format`

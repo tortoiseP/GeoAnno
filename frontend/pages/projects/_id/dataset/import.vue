@@ -60,16 +60,17 @@
         @removefile="handleFilePondRemoveFile"
       />
       <file-pond
-        v-if="selected && acceptedFileTypes === '*'"
-        ref="pond"
-        chunk-uploads="true"
-        label-idle="Drop files here..."
-        :allow-multiple="true"
-        :server="server"
-        :files="myFiles"
-        @processfile="handleFilePondProcessFile"
-        @removefile="handleFilePondRemoveFile"
-      />
+          v-if="selected && acceptedFileTypes === '*'"
+          ref="pond"
+          :chunk-uploads="false"
+          :chunk-size="chunkSize"
+          label-idle="选择文件上传..."
+          :allow-multiple="true"
+          :server="server"
+          :files="myFiles"
+          @processfile="handleFilePondProcessFile"
+          @removefile="handleFilePondRemoveFile"
+        />
       <v-data-table
         v-if="errors.length > 0"
         :headers="headers"
@@ -118,6 +119,7 @@ export default {
         { text: 'Message', value: 'message' }
       ],
       requiredRules: [(v) => !!v || 'Field value is required'],
+      chunkSize: 1000000000,
       server: {
         // url: '/v1/fp',
         url: '/v2/fp',

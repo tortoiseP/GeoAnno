@@ -46,7 +46,7 @@ import 'tui-editor/dist/tui-editor-contents.css'
 import 'codemirror/lib/codemirror.css'
 import { Editor, Viewer } from '@toast-ui/vue-editor'
 import '@/assets/style/editor.css'
-import '@toast-ui/editor/dist/toastui-editor-viewer.css'
+// import '@toast-ui/editor/dist/toastui-editor-viewer.css'
 
 export default {
   components: {

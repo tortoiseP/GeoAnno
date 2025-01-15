@@ -29,6 +29,18 @@
         filled
       />
     </template>
+    <template #[`item.isConfirmed`]="{ item }">
+      <v-chip v-if="item.isConfirmed"
+        class="ma-2"
+        color="green"
+        text-color="white"
+        >已标注</v-chip>
+      <v-chip v-else
+        class="ma-2"
+        color="orange"
+        text-color="white"
+      >未标注</v-chip>
+    </template>
     <template #[`item.fileUrl`]="{ item }">
       <v-img
         :src="item.fileUrl"
@@ -118,6 +130,11 @@ export default Vue.extend({
         //   value: 'meta',
         //   sortable: false
         // },
+        {
+          text: '状态',
+          value: 'isConfirmed',
+          sortable: false
+        },
         {
           text: this.$t('comments.comments'),
           value: 'commentCount',
